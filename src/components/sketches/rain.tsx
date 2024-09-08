@@ -1,20 +1,25 @@
 import * as React from "react";
 import { P5CanvasInstance, ReactP5Wrapper } from "@p5-wrapper/react";
 import { Particle, Attractor } from "../../p5/classes";
+import { useState, useEffect } from "react";
 
 let rain: Particle[] = [];
 let numRain = 200;
 let attractors: Attractor[] = [];
 
+
 const setup = (p5: P5CanvasInstance) => {
     return () => {
-        var canvas = p5.createCanvas(800, 800);
+        rain = [] as Particle[];
+        attractors = [] as Attractor[];
+
+        var canvas = p5.createCanvas(1200, 500);
         p5.background(0);
         
         for (let i = 0; i < numRain; i++) {
             let xpos = p5.random(p5.width);
             let ypos = p5.random(p5.height);
-            rain.push(new Particle(p5, xpos, ypos));
+            rain.push(new Particle(p5, xpos, ypos, 6, 3));
         }
         canvas.mousePressed(mouseClicked(p5));
     }
@@ -27,9 +32,7 @@ const mouseClicked = (p5: P5CanvasInstance) => {
 
 const draw = (p5: P5CanvasInstance) => {
     return () => {
-
-        p5.background(0);
-
+        p5.background(0, 155);
         let gravity = p5.createVector(0, 1);
         for (let i = 0; i < numRain; i++) {
 
@@ -55,6 +58,7 @@ const draw = (p5: P5CanvasInstance) => {
             // }
 
             rain[i].show();
+            // console.log(rain.length)
         }
     }
 }
@@ -66,14 +70,18 @@ const resetCanvas = () => {
 function sketch(p5: P5CanvasInstance) {
     p5.setup = setup(p5);
     p5.draw = draw(p5);
-    // p5.mouseClicked = mouseClicked(p5);
 }
 
 
 export function Rain() {
+    
+    let [rainState , setRain] = useState(rain);
+    useEffect(() => {
+        
+    })
     return <>
-    <ReactP5Wrapper sketch={sketch} />;
-    <button onClick={resetCanvas}>Reset</button>
+        <ReactP5Wrapper sketch={sketch} />;
+        <button onClick={resetCanvas}>Reset</button>
     </>
 
 }

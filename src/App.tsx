@@ -8,7 +8,6 @@ export default function App() {
   return (
     <>
     <Header />
-    <div data-bs-></div>
     <Container >
     {/* <div> */}
       {/* <h1>Basic Example</h1>
