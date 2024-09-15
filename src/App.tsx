@@ -2,7 +2,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Header } from "./components/header";
 import Home from "./pages/home";
 import { Container } from "react-bootstrap";
-import Works from "./pages/works";
+import { Works } from "./pages/works/allWorks";
 
 export default function App() {
   return (
