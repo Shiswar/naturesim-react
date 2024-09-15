@@ -1,19 +1,24 @@
 import { P5CanvasInstance, ReactP5Wrapper } from "@p5-wrapper/react";
 import { Grid } from "../../p5/layout/grid";
 import { BinaryGrid } from "../../p5/classes/binaryGrid";
+import { useState } from "react";
 
 var curr: BinaryGrid;
 var next: BinaryGrid;
+var pause: boolean;
 
 const setup = (p5: P5CanvasInstance) => {
     return () => {
         var canvas = p5.createCanvas(1000, 1000);
-        p5.frameRate(20);
+        pause = false;
+        // p5.frameRate(60);
         p5.background(255);
-        curr = new BinaryGrid(p5, 40, 40);
+        curr = new BinaryGrid(p5, 50, 50);
         curr.setup(p5);
         next = curr.copy();
-        
+
+        canvas.mousePressed(fillCell(p5))
+        curr.draw(p5);
 
     }
 }
@@ -21,25 +26,37 @@ const setup = (p5: P5CanvasInstance) => {
 const draw = (p5: P5CanvasInstance) => {
     return () => {
         next = curr.copy();
-        for (let i = 0; i < curr.rows; i++){
-            for (let j = 0; j < curr.cols; j++){
-                let numNeighbors = curr.countNeighbors(i, j);
-                if (curr.grid[i][j] === 0 ){
-                    if (numNeighbors === 3){
-                        next.setCell(i, j, 1);
+        if (!pause) {
+
+            for (let i = 0; i < curr.cols; i++){
+                for (let j = 0; j < curr.rows; j++){
+                    let numNeighbors = curr.countNeighbors(i, j);
+                    
+                    if (curr.grid[i][j] === 0 ){
+                        if (numNeighbors === 3){
+                            next.setCell(i, j, 1);
+                        }
                     }
-                }
-                else{
-                    if (numNeighbors < 2 || numNeighbors > 3){
-                        next.setCell(i, j, 0);
+                    else{
+                        if (numNeighbors < 2 || numNeighbors > 3){
+                            next.setCell(i, j, 0);
+                        }
                     }
                 }
             }
-        }
+        };
         next.draw(p5);
         curr = next.copy();
     }
     
+}
+
+const fillCell = (p5: P5CanvasInstance) => {
+    return () => {
+        const cellX = Math.floor(p5.mouseX / curr.cellWidth);
+        const cellY = Math.floor(p5.mouseY / curr.cellHeight);
+        curr.setCell(cellY, cellX, 1);
+    }
 }
 
 const sketch = (p5: P5CanvasInstance) => {
@@ -47,9 +64,23 @@ const sketch = (p5: P5CanvasInstance) => {
     p5.draw = draw(p5);
 }
 
-const pause = () => {}
 
 export function GameOfLife() {
-    return <ReactP5Wrapper sketch={sketch} />
+    let [buttonText, setButtonText] = useState("Pause");
+
+    const handleClick = () => {
+        pause = !pause;
+        setButtonText(pause ? "Play" : "Pause");
+    }
+
+    const clearGrid = () => {
+        curr.clear();
+    }
+    return <>
+        <ReactP5Wrapper sketch={sketch} />
+        <button onClick={() => handleClick()}>{buttonText}</button>
+        <button onClick={() => clearGrid()}>Clear</button>
+    </>
+
 }
 

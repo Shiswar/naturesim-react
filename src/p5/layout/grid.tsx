@@ -17,7 +17,6 @@ export class Grid{
         this.p5 = p5;
         this.res = 100;
         this.grid = Array(rows).fill(0).map(x => Array(cols).fill(0));
-        // this.setup(p5);
     }
 
     setup(p5: P5CanvasInstance){
@@ -38,5 +37,9 @@ export class Grid{
                 p5.rect(x, y, this.cellWidth, this.cellHeight);
             }
         }
+    }
+
+    clear(){
+        this.grid = Array(this.rows).fill(0).map(x => Array(this.cols).fill(0));
     }
 }

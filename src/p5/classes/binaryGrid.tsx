@@ -25,7 +25,7 @@ export class BinaryGrid extends Grid{
 
     copy(){
         let copy = new BinaryGrid(this.p5, this.rows, this.cols)
-        copy.grid = this.grid; 
+        copy.grid = this.grid.map(x => x.map(y => y));
         return copy;
     }
 
