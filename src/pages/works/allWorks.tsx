@@ -1,6 +1,8 @@
-import { GameOfLife } from "../../p5/sketches/gameOfLife";
-import { Planets } from "../../p5/sketches/planets";
-import { Rain } from "../../p5/sketches/rain";
+import {  
+    Rain,
+    Planets,
+    GameOfLife
+} from "../../p5/sketches";
 
 export function AllWorks() {
     // let [sims, setSims] = useState([<Rain />, <Planets/>])

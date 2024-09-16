@@ -4,7 +4,7 @@ import { Particle, Attractor } from "../../p5/classes";
 import { useState, useEffect } from "react";
 import SketchButton from "../../components/SketchButton";
 
-var pause: boolean;
+var pause: boolean = true;
 let rain: Particle[] = [];
 let numRain = 200;
 let canvasWidth = 1000;
@@ -97,10 +97,10 @@ export function Rain() {
 
     let [rainState, setRain] = useState(rain);
     useEffect(() => {
-
+        
     })
 
-    let [buttonText, setButtonText] = useState("Pause");
+    let [buttonText, setButtonText] = useState(pause ? "Play" : "Pause");
     const handleClick = () => {
         pause = !pause;
         setButtonText(pause ? "Play" : "Pause");
