@@ -9,7 +9,7 @@ var pause: boolean;
 
 const setup = (p5: P5CanvasInstance) => {
     return () => {
-        var canvas = p5.createCanvas(1000, 1000);
+        var canvas = p5.createCanvas(600, 600);
         pause = false;
         // p5.frameRate(60);
         p5.background(255);

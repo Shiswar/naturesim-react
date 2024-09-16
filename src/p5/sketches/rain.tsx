@@ -13,7 +13,7 @@ const setup = (p5: P5CanvasInstance) => {
         rain = [] as Particle[];
         attractors = [] as Attractor[];
 
-        var canvas = p5.createCanvas(1200, 500);
+        var canvas = p5.createCanvas(1000, 500);
         p5.background(0);
         
         for (let i = 0; i < numRain; i++) {
@@ -80,8 +80,14 @@ export function Rain() {
         
     })
     return <>
-        <ReactP5Wrapper sketch={sketch} />;
-        <button onClick={resetCanvas}>Reset</button>
+        <div className="flex flex-row">
+            <div>
+                <ReactP5Wrapper sketch={sketch} />;
+            </div>
+            <div>
+                <button className="btn bg-orng-500 text-linen-500" onClick={resetCanvas}>Reset</button>
+            </div>
+        </div>
     </>
 
 }

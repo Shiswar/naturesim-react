@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
     <Header />
-    <Container >
+    <Container fluid className="bg-night">
     {/* <div> */}
       {/* <h1>Basic Example</h1>
 
