@@ -10,7 +10,7 @@ var pause: boolean;
 const setup = (p5: P5CanvasInstance) => {
     return () => {
         var canvas = p5.createCanvas(600, 600);
-        pause = false;
+        pause = true;
         // p5.frameRate(60);
         p5.background(255);
         curr = new BinaryGrid(p5, 200, 200);
@@ -25,9 +25,9 @@ const setup = (p5: P5CanvasInstance) => {
 
 const draw = (p5: P5CanvasInstance) => {
     return () => {
-        next = curr.copy();
+        
         if (!pause) {
-
+            next = curr.copy();
             for (let i = 0; i < curr.cols; i++){
                 for (let j = 0; j < curr.rows; j++){
                     let numNeighbors = curr.countNeighbors(i, j);
@@ -44,9 +44,9 @@ const draw = (p5: P5CanvasInstance) => {
                     }
                 }
             }
+            next.draw(p5);
+            curr = next.copy();
         };
-        next.draw(p5);
-        curr = next.copy();
     }
     
 }
