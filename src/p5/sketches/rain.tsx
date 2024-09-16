@@ -8,7 +8,7 @@ var pause: boolean;
 let rain: Particle[] = [];
 let numRain = 200;
 let canvasWidth = 1000;
-let canvasHeight = 500
+let canvasHeight = 500;
 let attractors: Attractor[] = [];
 let _p5: P5CanvasInstance;
 
@@ -17,7 +17,7 @@ const setup = () => {
     return () => {
         rain = [] as Particle[];
         attractors = [] as Attractor[];
-        pause = false;
+        pause = true;
 
         var canvas = _p5.createCanvas(canvasWidth, canvasHeight);
         _p5.background(0);

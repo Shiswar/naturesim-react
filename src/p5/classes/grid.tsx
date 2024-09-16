@@ -27,6 +27,14 @@ export class Grid{
         }
     }
 
+    randomize(p5: P5CanvasInstance){
+        for (let i = 0; i < this.rows; i++){
+            for (let j = 0; j < this.cols; j++){
+                this.grid[i][j] = Math.floor(p5.random(2));
+            }
+        }
+    }
+
     draw(p5: P5CanvasInstance){
         p5.fill(0);
         p5.rect(0, 0, p5.width, p5.height);
