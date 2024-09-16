@@ -1,5 +1,5 @@
 import { P5CanvasInstance, ReactP5Wrapper } from "@p5-wrapper/react";
-import { Grid } from "../../p5/layout/grid";
+import { Grid } from "../../p5/classes/grid";
 import { BinaryGrid } from "../../p5/classes/binaryGrid";
 import { useState } from "react";
 
@@ -13,7 +13,7 @@ const setup = (p5: P5CanvasInstance) => {
         pause = false;
         // p5.frameRate(60);
         p5.background(255);
-        curr = new BinaryGrid(p5, 50, 50);
+        curr = new BinaryGrid(p5, 200, 200);
         curr.setup(p5);
         next = curr.copy();
 

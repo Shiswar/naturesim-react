@@ -1,5 +1,5 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { Grid } from "../layout/grid";
+import { Grid } from "./grid";
 
 export class BinaryGrid extends Grid{
     constructor(p5: P5CanvasInstance, rows: number, cols: number){

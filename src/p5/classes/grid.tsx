@@ -28,13 +28,17 @@ export class Grid{
     }
 
     draw(p5: P5CanvasInstance){
+        p5.fill(0);
+        p5.rect(0, 0, p5.width, p5.height);
+        p5.fill(255);
+        p5.stroke(0);
         for (let i = 0; i < this.rows; i++){
             for (let j = 0; j < this.cols; j++){
-                let x =  j * this.cellWidth;
-                let y = i * this.cellHeight;
-                p5.fill(this.grid[i][j] > 0 ? 255 : 0 );
-                p5.stroke(0);
-                p5.rect(x, y, this.cellWidth, this.cellHeight);
+                if(this.grid[i][j] > 0){
+                    let x =  j * this.cellWidth;
+                    let y = i * this.cellHeight;
+                    p5.rect(x, y, this.cellWidth, this.cellHeight);
+                }
             }
         }
     }
