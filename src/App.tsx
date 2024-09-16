@@ -2,7 +2,7 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Header } from "./components/header";
 import { Home } from "./pages/home";
 import { Container } from "react-bootstrap";
-import { Works } from "./pages/works";
+import { AllWorks } from "./pages/works";
 
 export default function App() {
   return (
@@ -34,7 +34,7 @@ export default function App() {
                 routes for. */}
           
         </Route>
-        <Route path="works" element={<Works />} />
+        <Route path="works" element={<AllWorks />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     {/* </div> */}

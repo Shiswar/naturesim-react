@@ -1,9 +1,9 @@
-import { GameOfLife } from "../../components/sketches/gameOfLife";
-import { Planets } from "../../components/sketches/planets";
-import { Rain } from "../../components/sketches/rain"
+import { GameOfLife } from "../../p5/sketches/gameOfLife";
+import { Planets } from "../../p5/sketches/planets";
+import { Rain } from "../../p5/sketches/rain";
 import { useState, useEffect } from "react";
 
-export function Works(){
+export function AllWorks(){
     let [sims, setSims] = useState([<Rain />, <Planets/>])
 
     useEffect(() =>{
