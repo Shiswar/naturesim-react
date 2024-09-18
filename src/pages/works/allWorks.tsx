@@ -1,3 +1,4 @@
+import { GameOfLife2 } from "../../components/sketches/gameOfLife-2";
 import { GameOfLife } from "../../components/sketches/gameOfLife";
 import { Planets } from "../../components/sketches/planets";
 import { Rain } from "../../components/sketches/rain"
@@ -10,7 +11,7 @@ export function Works(){
         setSims([
             // <Rain />, 
             // <Planets/>, 
-            < GameOfLife />])
+            < GameOfLife2 />])
     }, [])
     
     return <>
