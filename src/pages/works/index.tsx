@@ -1,1 +1,1 @@
-export * from "./AllWorks"
+export * from "./allWorks"
