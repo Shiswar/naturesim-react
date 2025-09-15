@@ -3,44 +3,87 @@ import { Header } from "./components/header";
 import { Home } from "./pages/home";
 import { Container } from "react-bootstrap";
 import { AllWorks } from "./pages/works";
+import { createContext } from "react";
+import { useTheme } from "./theme/ThemeContext";
+import { ThemeProvider } from "./theme/ThemeContext";
+import { Wordle } from "./pages";
+import "./App.css";
+
+const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <div className="d-flex">
+      {/* Sidebar */}
+      <Sidebar />
+
+      
+      {/* Main content area */}
+      <div className="flex-grow-1">
+        {/* <Header /> */}
+        <main className="content-area">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+};
 
 export default function App() {
   return (
-    <>
-    <Header />
-    <Container fluid className="bg-night">
-    {/* <div> */}
-      {/* <h1>Basic Example</h1>
-
-      <p>
-        This example demonstrates some of the core features of React Router
-        including nested <code>&lt;Route&gt;</code>s,{" "}
-        <code>&lt;Outlet&gt;</code>s, <code>&lt;Link&gt;</code>s, and using a
-        "*" route (aka "splat route") to render a "not found" page when someone
-        visits an unrecognized URL.
-      </p> */}
-
-      {/* Routes nest inside one another. Nested route paths build upon
-            parent route paths, and nested route elements render inside
-            parent route elements. See the note about <Outlet> below. */}
-      <Routes>
-        <Route path="/" element={<Home />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="dashboard" element={<Dashboard />} />
-
-          {/* Using path="*"" means "match anything", so this route
-                acts like a catch-all for URLs that we don't have explicit
-                routes for. */}
-          
-        </Route>
-        <Route path="works" element={<AllWorks />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
-    {/* </div> */}
-    </Container>
-    </>
+    <ThemeProvider>
+      <div className="app-bg app-container d-flex flex-column min-vh-100">
+        <Container fluid className="p-0 flex-grow-1 d-flex">
+          <MainLayout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="works" element={<AllWorks />} />
+              <Route path="wordle" element={<Wordle/>} />
+              <Route path="*" element={<NoMatch />} />
+            </Routes>
+          </MainLayout>
+        </Container>
+      </div>
+    </ThemeProvider>
   );
+}
+
+const Sidebar: React.FC = () => {
+  return (
+    <div className="flex flex-col sidebar">
+      <nav className="sidebar min">
+        <ul>
+          {/* <NavLink to="/home" label="Home" />
+          <NavLink to="/about" label="About" /> */}
+          <NavLink to="/works" label="P5 Stuff" />
+          {/* <NavLink to="/about" label="About" /> */}
+          <NavLink to="/wordle" label="Wordle" />
+
+          {/* <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/nothing-here">Nothing Here</Link>
+          </li> */}
+        </ul>
+      </nav>
+    </div>
+  )
+}
+
+const NavLink: React.FC<{ to: string, label: string }> = ({ to, label }) => {
+  return (
+    <Link to={to}>
+      <li className="p-3 m-2 bg-orange hover:bg-orng">{label}</li>
+    </Link>
+  )
 }
 
 function Layout() {
@@ -58,6 +101,9 @@ function Layout() {
           </li>
           <li>
             <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/wordle">Wordle</Link>
           </li>
           <li>
             <Link to="/nothing-here">Nothing Here</Link>

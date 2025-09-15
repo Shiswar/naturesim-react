@@ -14,9 +14,9 @@ const setup = () => {
     return () => {
         var canvas = _p5.createCanvas(canvasWidth, canvasHeight);
         pause = true;
-        // p5.frameRate(60);
+        _p5.frameRate(20);
         _p5.background(255);
-        curr = new BinaryGrid(_p5, 200, 200);
+        curr = new BinaryGrid(_p5, 100, 100);
         curr.setup(_p5);
         next = curr.copy();
 
@@ -87,7 +87,7 @@ export function GameOfLife() {
     return <>
     <div className="flex flex-row">
             <div>
-                <ReactP5Wrapper sketch={sketch} />;
+                <ReactP5Wrapper sketch={sketch} />
             </div>
             <div className="flex flex-col">
                 {/* <button className="btn bg-orng-500 text-linen-500 m-4" onClick={resetCanvas}>Reset</button> */}

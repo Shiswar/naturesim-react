@@ -28,7 +28,7 @@ export class Particle {
             this.vel.set(0, 0);
             this.acc.set(0, 0);
         }
-        if (this.pos.x >= this.p5.width - this.r) {
+        if (this.pos.x >= this.p5.width - this.r || this.pos.x <= this.r) {
             // this.move(0, this.pos.y);
             this.vel.x *= -1
         }

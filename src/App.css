@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.app-bg {
+  background-image: url('./assets/images/backgrounds/main-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -28,6 +35,11 @@
   color: #61dafb;
 }
 
+.sidebar{
+  width: 10vw;
+  background-color: rgb(32, 32, 32);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +48,5 @@
     transform: rotate(360deg);
   }
 }
+
+

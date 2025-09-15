@@ -1,0 +1,47 @@
+
+.board {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    color: white;
+}
+
+.guessLine{
+    display: flex;
+    gap:5px;
+}
+
+.tile{
+    width: 100px;
+    height: 100px;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(42, 42, 42);
+}
+
+.correct {
+    background-color: darkgreen;
+}
+
+.incorrect {
+    background-color: rgb(136, 136, 136);
+}
+
+.almost {
+    background-color: rgb(200, 160, 0);
+}
+
+.page {
+    display: flex;
+    margin: auto;
+    padding: 10px;
+    gap: 50px;
+}
+
+.result {
+    font-size: 100px;
+ }

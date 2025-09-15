@@ -1,3 +1,8 @@
+import PageWrapper from "../../components/PageWrapper";
+
 export function Home(){
-    return <div>Home</div>
+    return <PageWrapper>
+        <div>Home</div>
+    </PageWrapper>
+    
 }

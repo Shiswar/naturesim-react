@@ -3,20 +3,22 @@ import { Button, Card } from "react-bootstrap";
 import { GameOfLife } from "../p5/sketches/gameOfLife";
 
 export interface SketchCardProps {
+    sketch: ReactNode
+    title: string
+    description?: string
     children?: ReactNode
 }
 
-export function SketchCard({ children , ...props}: SketchCardProps){
-    return (<Card >
-        {children}
-        <Card.Body>
-            <Card.Title>Conway's Game of Life</Card.Title>
+export const SketchCard: React.FC<SketchCardProps> = ({ ...props}: SketchCardProps) => {
+    return (
+    <Card text="light" color="primary" className="m-2 bg-night-100">
+        <Card.Title className="m-2">{props.title}</Card.Title>
+        <hr />
+        <Card.Body className="d-flex">
+            {props.sketch}
             <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-            
+                {props.description || "No description provided."}
             </Card.Text>
         </Card.Body>
     </Card>);
-
 }

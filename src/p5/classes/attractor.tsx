@@ -1,5 +1,6 @@
 import { P5CanvasInstance  } from "@p5-wrapper/react";
 import { Vector } from "p5";
+import { Particle } from "./particle";
 
 export class Attractor{
     public pos: Vector;
@@ -14,9 +15,9 @@ export class Attractor{
         this.strength = 1;
     }
     
-    attract(obj: any){
+    attractParticle(obj: Particle){
         let attraction = Vector.sub(this.pos, obj.pos )
-        attraction.setMag(1);
+        attraction.setMag(0.5);
         obj.applyForce(attraction);
     }
     
