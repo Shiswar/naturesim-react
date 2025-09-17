@@ -1,75 +1,95 @@
 // hooks/useWordService.ts
 import { useState, useEffect, useCallback } from 'react';
+import { getRandom, searchDictionary } from './wordService';
 
 interface WordServiceState {
-  words: Set<string> | null;
+  word: string | null;
   isLoading: boolean;
   error: string | null;
 }
 
 interface WordServiceReturn {
-  isReal: (word: string) => boolean;
+  isReal: (word: string) => Promise<boolean>;
+  solution: string | null;
   isLoading: boolean;
   error: string | null;
-  getWordCount: () => number;
-  getRandomWord: () => string | null;
 }
 
-export const useWordService = (): WordServiceReturn => {
+export const useWordService = (gamesPlayed: number): WordServiceReturn => {
   const [state, setState] = useState<WordServiceState>({
-    words: null,
+    word: null,
     isLoading: true,
     error: null
   });
 
   useEffect(() => {
-    const loadWords = async () => {
+    const getSolutionWord = async () => {
       try {
-        setState(prev => ({ ...prev, isLoading: true, error: null }));
-        
+        setLoading();
+
         // Option A: Dynamic import
-        const wordData = await import('./english_words.json');
-        const wordsArray = wordData.words as string[];
-        
-        const wordsSet = new Set(wordsArray.map(word => word.toLowerCase()));
-        
-        setState({
-          words: wordsSet,
-          isLoading: false,
+        // const wordData = await import('./english_words.json');
+        // const wordsArray = wordData.words as string[];
+
+        const word = await getRandomWord(5, 1);
+
+        setState((prev) => ({
+          ...prev,
+          word: word?.toUpperCase() ?? null,
           error: null
-        });
+        }));
       } catch (err) {
-        setState({
-          words: null,
-          isLoading: false,
+        setState((prev) => ({
+          ...prev,
+          word: null,
           error: err instanceof Error ? err.message : 'Failed to load words'
-        });
+        }));
+      }
+      finally {
+        setFinishedLoading()
       }
     };
 
-    loadWords();
+    getSolutionWord();
+  }, [gamesPlayed]);
+
+  const isReal = useCallback(async (word: string): Promise<boolean> => {
+    setLoading();
+
+    const realOrNot = await searchDictionary(word);
+
+    setFinishedLoading();
+
+    if (!realOrNot.success) { return false; }
+    return true;
   }, []);
 
-  const isReal = useCallback((word: string): boolean => {
-    if (!state.words) return false;
-    return state.words.has(word.toLowerCase());
-  }, [state.words]);
+  const setLoading = () => {
+    setState((prev) => ({
+      ...prev,
+      isLoading: true
+    }));
+  }
 
-  const getWordCount = useCallback((): number => {
-    return state.words?.size || 0;
-  }, [state.words]);
+  const setFinishedLoading = () => {
+    setState((prev) => ({
+      ...prev,
+      isLoading: false
+    }));
+  }
 
-  const getRandomWord = useCallback((): string | null => {
-    if (!state.words || state.words.size === 0) return null;
-    const wordsArray = Array.from(state.words);
-    return wordsArray[Math.floor(Math.random() * wordsArray.length)];
-  }, [state.words]);
+
+  const getRandomWord = useCallback(async (wordLength: number, limit: number): Promise<string | null> => {
+    const word = await getRandom(wordLength, limit);
+    return word;
+  }, []);
+
+
 
   return {
     isReal,
+    solution: state.word,
     isLoading: state.isLoading,
-    error: state.error,
-    getWordCount,
-    getRandomWord
+    error: state.error
   };
 };

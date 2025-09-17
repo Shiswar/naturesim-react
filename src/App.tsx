@@ -1,37 +1,32 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
-import { Header } from "./components/header";
 import { Home } from "./pages/home";
-import { Container } from "react-bootstrap";
 import { AllWorks } from "./pages/works";
-import { createContext } from "react";
-import { useTheme } from "./theme/ThemeContext";
 import { ThemeProvider } from "./theme/ThemeContext";
 import { Wordle } from "./pages";
 import "./App.css";
 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <div className="d-flex">
-      {/* Sidebar */}
-      <Sidebar />
+  return (<>
+    {/* Sidebar */}
+    <NavBar />
 
-      
-      {/* Main content area */}
-      <div className="flex-grow-1">
-        {/* <Header /> */}
-        <main className="content-area">
-          {children}
-        </main>
-      </div>
+
+    {/* Main content area */}
+    <div className="flex-grow-1">
+      {/* <Header /> */}
+      <main className="content-area">
+        {children}
+      </main>
     </div>
+  </>
   );
 };
 
 export default function App() {
   return (
     <ThemeProvider>
-      <div className="app-bg app-container d-flex flex-column min-vh-100">
-        <Container fluid className="p-0 flex-grow-1 d-flex">
+      <div className="app-bg app-container min-vh-100">
+        {/* <Container fluid className="flex-grow-1 "> */}
           <MainLayout>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -39,21 +34,21 @@ export default function App() {
               <Route path="about" element={<About />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="works" element={<AllWorks />} />
-              <Route path="wordle" element={<Wordle/>} />
+              <Route path="wordle" element={<Wordle />} />
               <Route path="*" element={<NoMatch />} />
             </Routes>
           </MainLayout>
-        </Container>
+        {/* </Container> */}
       </div>
     </ThemeProvider>
   );
 }
 
-const Sidebar: React.FC = () => {
+const NavBar: React.FC = () => {
   return (
-    <div className="flex flex-col sidebar">
-      <nav className="sidebar min">
-        <ul>
+    <div className="sidebar">
+      <nav className="flex min">
+        {/* <ul> */}
           {/* <NavLink to="/home" label="Home" />
           <NavLink to="/about" label="About" /> */}
           <NavLink to="/works" label="P5 Stuff" />
@@ -72,7 +67,7 @@ const Sidebar: React.FC = () => {
           <li>
             <Link to="/nothing-here">Nothing Here</Link>
           </li> */}
-        </ul>
+        {/* </ul> */}
       </nav>
     </div>
   )

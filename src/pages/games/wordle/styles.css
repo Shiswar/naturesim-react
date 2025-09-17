@@ -1,19 +1,20 @@
-
 .board {
+    margin: auto;
     display: flex;
     flex-direction: column;
-    gap:5px;
+    gap: 5px;
     color: white;
 }
 
-.guessLine{
+.guessLine {
     display: flex;
-    gap:5px;
+    justify-content: center;
+    gap: 5px;
 }
 
-.tile{
-    width: 100px;
-    height: 100px;
+.tile {
+    width: 80px;
+    height: 80px;
     font-size: 36px;
     display: flex;
     justify-content: center;
@@ -36,12 +37,33 @@
 }
 
 .page {
-    display: flex;
     margin: auto;
+    max-width: 50%;
     padding: 10px;
     gap: 50px;
 }
 
 .result {
-    font-size: 100px;
- }
+    font-size: 50px;
+}
+
+.keyboard {
+    margin: auto;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.keyboard-line{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.tile-small{
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+}
